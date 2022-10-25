@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* Get rid of all default margins/paddings. Set typeface */
+body {
+  box-sizing: border-box;
+  margin: 100px 130px;
+  padding: 0;
+  background-color: #87A96B;
+  font-family: "lato", sans-serif;
+}
+
+.warning {
+  color: red;
+}
+
+/*for navbar*/
+nav img {
+  height: 80px;
+  margin-left: 40px;
+}
+
+nav {
+background-color: white;
+position: fixed;
+top: 0;
+left: 0;
+height: 80px;
+width: 100%;
+display: flex;
+align-items: center;
+}
+
+nav * {
+display: inline;
+}
+
+nav li {
+margin: 20px;
+}
+
+nav li a {
+color: black;
+text-decoration: none;
+}
+
+main {
+  color: white;
+}
+
+
+/* Sign up and Login Form */
+#signupForm, #loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  width: 400px;
+  border-radius: 8px;
+  padding: 20px 40px;
+  box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+  margin: auto;
+}
+
+.inputContainer {
+  width: 85%;
+  margin-bottom: 20px;
+}
+
+.inputContainer label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.inputContainer input {
+  height: 45px;
+  width: 100%;
+  border: 1px solid #DADCE0;
+  border-radius: 7px;
+  font-size: 16px;
+  padding: 0 20px;
+  outline: none;
+  background: none;
+  z-index: 1;
+}
+
+input:focus {
+  border: 2px solid green;
+}
+
+.title {
+  font-size: 50px;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#submitBtn {
+  display: block;
+  padding: 15px 30px;
+  border: none;
+  background-color: green;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  margin: 30px 0;
+}
+
+#submitBtn:hover:not(:disabled) {
+  cursor: pointer;
+  background-color: #9867C5;
+}
+
+#submitBtn:disabled {
+  background-color: darkgray;
+  color: black;
+}
+
+
+
+
+
+
+
