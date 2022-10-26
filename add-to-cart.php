@@ -2,6 +2,12 @@
 include "dbconnect.php";
 session_start();
 
+
+if (!isset($_SESSION['uid'])) {
+  http_response_code(401);  // not authorized: user not logged in
+  exit;
+}
+
 if (!isset($_SESSION['cart'])) {
   $_SESSION['cart'] = array();
 }
@@ -17,7 +23,7 @@ if (isset($_GET["add"])) {
     $obj1 = $res1->fetch_object();
     $obj2 = $res2->fetch_object();
     if ($obj1->food_store_id != $obj2->food_store_id) {
-      http_response_code(400);
+      http_response_code(400);  // bad request: adding items from multiple stores to shopping cart is not allowed
     } else {
       if (array_key_exists($itemId, $_SESSION['cart'])) {
         $_SESSION['cart'][$itemId]++;
@@ -27,7 +33,6 @@ if (isset($_GET["add"])) {
       http_response_code(200);
     }
   }
-
 }
 
 if (isset($_GET["remove"])) {
