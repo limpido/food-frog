@@ -76,29 +76,33 @@
             if (isset($_SESSION['uid']))
             {
               $total = 0;
-
-              foreach($_SESSION['cart'] as $itemId=>$quantity) {
-                $query = "SELECT * FROM food_items WHERE id=".$itemId;
-                $res = $db->query($query);
-                $item = $res->fetch_object();
-                $subtotal = $item->price * $quantity;
-                $total += $subtotal;
-
-                echo '<div class="item" id="item_'.$item->id.'">';
-                echo '<div class="item-img-container"><img class="item-img" src="'.$item->image.'"></div>';
-                echo '<div class="item-text">';
-                echo '<div class="item-name">'.$item->name.'</div>';
-                echo '<div class="item-price">$'.$item->price.'</div>';
-                echo '<div class="quantity">
-                        <button onclick=increaseCount('.$item->id.','.$item->price.')>+</button>
-                        <div class="count" id="count_'.$item->id.'">'.$quantity.'</div>
-                        <button onclick=decreaseCount('.$item->id.','.$item->price.')>-</button>
-                      </div>';
-                echo '<div class="subtotal" id="subtotal_'.$item->id.'">$'.number_format((float)$subtotal, 2, '.', '').'</div>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="total">Total: <span id="total">$<?=number_format((float)$total, 2, ".", "")?></span></div>';
+              
+              if (isset($_SESSION['cart'])) {
+                foreach($_SESSION['cart'] as $itemId=>$quantity) {
+                  $query = "SELECT * FROM food_items WHERE id=".$itemId;
+                  $res = $db->query($query);
+                  $item = $res->fetch_object();
+                  $subtotal = $item->price * $quantity;
+                  $total += $subtotal;
+  
+                  echo '<div class="item" id="item_'.$item->id.'">';
+                  echo '<div class="item-img-container"><img class="item-img" src="'.$item->image.'"></div>';
+                  echo '<div class="item-text">';
+                  echo '<div class="item-name">'.$item->name.'</div>';
+                  echo '<div class="item-price">$'.$item->price.'</div>';
+                  echo '<div class="quantity">
+                          <button onclick=increaseCount('.$item->id.','.$item->price.')>+</button>
+                          <div class="count" id="count_'.$item->id.'">'.$quantity.'</div>
+                          <button onclick=decreaseCount('.$item->id.','.$item->price.')>-</button>
+                        </div>';
+                  echo '<div class="subtotal" id="subtotal_'.$item->id.'">$'.number_format((float)$subtotal, 2, '.', '').'</div>';
+                  echo '</div>';
+                  echo '</div>';
+                }
               }
+
+              echo '<div class="total">Total: <span id="total">$'.number_format((float)$total, 2, ".", "").'</span></div>';
+              
             }
             else
             {
