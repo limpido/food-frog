@@ -9,7 +9,7 @@ create table food_stores
 );
 
 INSERT INTO food_stores (id, name, image, cuisine_type) values 
-  (1, "Cha Cha Tacos", "media/foodplaces/mexican_food.jpg", "Mexican"),
+  (1, "Cha Cha Tacos", "media/foodplaces/mexican_food.jpeg", "Mexican"),
   (2, "Sizzling Indian", "media/foodplaces/indian_food.jpg", "Indian"),
   (3, "Yellow Table", "media/foodplaces/chinese_food.jpg", "Chinese"),
   (4, "Grizzly Ranch", "media/foodplaces/western_food.jpg", "Western")

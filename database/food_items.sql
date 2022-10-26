@@ -47,7 +47,7 @@ INSERT INTO food_items (food_store_id, name, image, food_category, is_best_selle
   (3, "Egg Fried Rice", "media/chinese/egg_fried_rice.jpg" , "Main", 1, 5.00),
   (3, "Fish Soup", "media/chinese/fish_soup.jpg" , "Main", 1, 6.50),
   (3, "Char Kuey Teow", "media/chinese/kuey_teow.jpg" , "Main", 0, 5.00),
-  (3, "Peanut Ball Soup", "media/chinese/peanut_ball_soup.jpg" , "Dessert", 1, 2.00),
+  (3, "Peanut Ball Soup", "media/chinese/peanut_ball.jpg" , "Dessert", 1, 2.00),
   (3, "Herbal Tea", "media/chinese/herbal_tea.jpg", "Beverages", 0, 2.00),
 
   (4, "Chicken Chop", "media/western/chicken_chop.jpg" , "Main", 1, 5.00),
