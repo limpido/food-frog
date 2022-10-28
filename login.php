@@ -9,7 +9,8 @@
 <?php include 'components/nav.php';?>
 
 <body>
-
+  <main>
+    <div class="container">
   <?php
   include "dbconnect.php";
   if (!isset($_SESSION)) { 
@@ -18,7 +19,7 @@
 
   if (isset($_POST['submit']) && $_POST['submit'] == "Login") {
     if (empty($_POST['email']) || empty($_POST['pwd'])) {
-      echo "<div class='warning'>All records to be filled in</div>";
+      echo "<div class='warning'>All records need to be filled in</div>";
       include "components/login-form.php";
       exit;
     }
@@ -38,7 +39,7 @@
       $_SESSION['uid'] = $user -> id;
       $_SESSION['username'] = $user -> username;
       header('location:' . $_SERVER['PHP_SELF']);
-      exit();
+      exit;
     } else {
       echo "<div class='warning'>Wrong email or password, please try again.</div>";
       include "components/login-form.php";
@@ -53,26 +54,9 @@
   }
 
   ?>
-
-<!-- <form action="login.php" method="POST" id="loginForm">
-      <h1 class="title">Login</h1>
-
-      <div class="inputContainer">
-        <label for="email">Email</label>  
-        <input type="email" name="email" id="email" value="" placeholder="Email" onchange="validateEmail()">
-      </div>
-
-      <div class="inputContainer">
-        <label for="pwd">Password</label>
-        <input type="password" name="pwd" id="pwd" value="" placeholder="Password" onchange="validatePwd()">
-      </div>
-
-      <div class="submit-container">
-      <input type="submit" name="submit" id="submitBtn" value="Login">
-        <div>Do not have an account? <a href="signup.php">Sign up</a></div>
-      </div>
-    </form> -->
+  </div>
   <?php include 'components/footer.php';?>
+  </main>
 </body>
 <script type="text/javascript" src="scripts/login.js"></script>
 </html>

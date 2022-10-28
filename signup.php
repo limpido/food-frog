@@ -9,12 +9,13 @@
 </head>
 <?php include 'components/nav.php';?>
 <body>
+  <main>
+    <div class="container">
   <?php
   include "dbconnect.php";
-  // var_dump($_POST);
   if (isset($_POST['submit']) && $_POST['submit'] == "Sign up") {
     if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['pwd']) || empty($_POST['cpwd'])) {
-      echo "<div class='warning'>All records to be filled in</div>";
+      echo "<div class='warning'>All records need to be filled in</div>";
       include "components/signup-form.php";
       exit;
     }
@@ -47,36 +48,8 @@
     include "components/signup-form.php";
   }
   ?>
-    <form id="signupForm" action="register.php" autocomplete="false">
-      <h1 class="title">Sign up</h1>
-
-      <div class="inputContainer">
-        <label for="email">Email</label>  
-        <input type="email" name="email" id="email" value="" placeholder="Email" onchange="validateEmail()">
-      </div>
-
-      <div class="inputContainer">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="" placeholder="Username" onchange="validateUsername()">
-      </div>
-
-      <div class="inputContainer">
-        <label for="pwd">Password</label>
-        <input type="password" name="pwd" id="pwd" value="" placeholder="Password" onchange="validatePwd()">
-      </div>
-
-      <div class="inputContainer">
-        <label for="cpwd">Confirm Password</label>
-        <input type="password" name="cpwd" id="cpwd" value="" placeholder="Confirm Password" onchange="validatecpwd()">
-      </div>
-
-      <div class="submit-container">
-        <input type="submit" name="submit" id="submitBtn" value="Sign up">
-        <div>Already have an account? <a href="login.php">Log in</a></div>
-      </div>
-    </form>
   <?php include 'components/footer.php';?>
-
+</main>
 </body>
 <script type="text/javascript" src="scripts/signup.js"></script>
 </html>
