@@ -32,6 +32,9 @@ if (isset($_GET["add"])) {
       }
       http_response_code(200);
     }
+  } else {
+    $_SESSION['cart'][$itemId] = 1;
+    http_response_code(200);
   }
 }
 

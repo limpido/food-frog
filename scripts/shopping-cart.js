@@ -1,11 +1,13 @@
+updatePlaceOrderButtonState();
+
 function increaseCount(id, price) {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", `add-to-cart.php?add=${id}`);
   xhttp.send();
 
   const countNode = document.getElementById(`count_${id}`);
-  let count = Number(countNode.innerHTML);
-  countNode.innerHTML = count+1;
+  cart[id] += 1;
+  countNode.innerHTML = cart[id];
   updateSubtotal(id, price, increase=true);
   updateTotal(price, increase=true);
 }
@@ -16,17 +18,17 @@ function decreaseCount(id, price) {
   xhttp.send();
 
   const countNode = document.getElementById(`count_${id}`);
-  let count = Number(countNode.innerHTML);
-  count -= 1;
-  if (count === 0) {
-    const containerNode = document.getElementsByClassName("container")[0];
+  cart[id] -= 1;
+  if (cart[id] === 0) {
+    delete cart[id];
     const itemNode = document.getElementById(`item_${id}`);
     itemNode.remove();
+    updatePlaceOrderButtonState();
   } else {
-    countNode.innerHTML = count;
+    countNode.innerHTML = cart[id];
     updateSubtotal(id, price, increase=false);
-    updateTotal(price, increase=false);
   }
+  updateTotal(price, increase=false);
 }
 
 function updateSubtotal(id, price, increase) {
@@ -49,4 +51,13 @@ function updateTotal(price, increase) {
     total -= price;
   }
   totalNode.innerHTML = '$' + total.toFixed(2);
+}
+
+function updatePlaceOrderButtonState() {
+  const btn = document.getElementById("placeOrderBtn");
+  if (!cart || Object.keys(cart).length === 0) {
+    btn.disabled = true;
+  } else {
+    btn.disabled = false;
+  }
 }

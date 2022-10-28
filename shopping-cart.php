@@ -58,6 +58,10 @@
       font-size: 20px;
     }
 
+    .btn-container {
+      display: flex;
+      justify-content: center;
+    }
     
   </style>
 </head>
@@ -65,19 +69,22 @@
         <header>
           <?php include 'components/nav.php';?>
         </header>
+        <main>
           <div class="container">
             <?php
             include "dbconnect.php";
+
             if(!isset($_SESSION)) 
             { 
                 session_start(); 
             }
-
+            
             if (isset($_SESSION['uid']))
             {
               $total = 0;
               
-              if (isset($_SESSION['cart'])) {
+              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                // shopping cart items
                 foreach($_SESSION['cart'] as $itemId=>$quantity) {
                   $query = "SELECT * FROM food_items WHERE id=".$itemId;
                   $res = $db->query($query);
@@ -99,22 +106,65 @@
                   echo '</div>';
                   echo '</div>';
                 }
-              }
 
-              echo '<div class="total">Total: <span id="total">$'.number_format((float)$total, 2, ".", "").'</span></div>';
-              
+                echo '<form method="POST" action="place-order.php">';
+                // select collection point
+                echo '<div>';
+                echo '<label for="collection-point">Choose a collection point:</label><br>';
+                echo '<select name="collectionPoint" id="collectionPoint">';
+                $queryCollectionPoint = "SELECT * FROM collection_points;";
+                $res = $db->query($queryCollectionPoint);
+                for ($i=0; $i < $res->num_rows; $i++) {
+                  $collectionPt = $res->fetch_object();                  
+                  echo '<option value="'.$collectionPt->name.'">'.$collectionPt->name.'</option>';
+                }
+                echo '</select>';
+                echo '</div>';
+
+                // select collection time
+                echo '<div>';
+                echo '<label for="collection-time">Choose a collection time:</label><br>';
+                echo '<select name="collectionTime" id="collectionTime">';
+                $queryCollectionTime = "SELECT * FROM collection_time;";
+                $res = $db->query($queryCollectionTime);
+                for ($i=0; $i < $res->num_rows; $i++) {
+                  $collectionTime = $res->fetch_object();                  
+                  echo '<option value="'.$collectionTime->time.'">'.$collectionTime->time.'</option>';
+                }
+                echo '</select>';
+                echo '</div>';
+                echo '<input type="hidden" name="total" value="'.$total.'" />';
+
+                // total price
+                echo '<div class="total">Total: <span id="total">$'.number_format((float)$total, 2, ".", "").'</span></div>';
+
+                // place order button
+                echo '<div class="btn-container"><input type="submit" name="place-order" value="Place Order" id="placeOrderBtn"></div>';
+                echo '</form>';
+                
+              } else {
+                echo '<div>Your shopping cart is empty.</div>';
+              }
             }
-            else
+            ?>
+
+            <?php
+            if (!isset($_SESSION['uid']))
             {
               echo '<p>You are not logged in.</p>';
               echo '<p>Only logged in members may see this page.</p>';
             }
-
-            
             ?>
           </div>
+          <?php include 'components/footer.php';?>
+          </main>
     </body>
-  <?php include 'components/footer.php';?>
 </body>
+<script>
+  <?php
+  $jsonCart = json_encode($_SESSION['cart']);
+  echo "var cart = ". $jsonCart . ";\n";
+  ?>
+</script>
 <script type="text/javascript" src="scripts/shopping-cart.js"></script>
 </html>
