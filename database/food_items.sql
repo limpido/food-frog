@@ -3,9 +3,9 @@ create table food_items
 (
   id int NOT NULL AUTO_INCREMENT,
   food_store_id INT NOT NULL,
-  name char(50) null,
-  image char(50) default null,
-  food_category char(50) default 0,
+  name varchar(50) null,
+  image varchar(100) default null,
+  food_category varchar(50) default 0,
   is_best_seller BOOL default 0,
   price float(6, 2) default 0,
   primary key (id),
@@ -27,7 +27,7 @@ INSERT INTO food_items (food_store_id, name, image, food_category, is_best_selle
   (1, "Bottled Water", "media/mexican/bottled_water.jpg", "Beverages", 0, 1.50),
   (1, "Ice Lemon Tea", "media/mexican/ice_lemon_tea.jpg", "Beverages", 1, 2.00),
   (1, "Freshly-Squeezed Orange Juice", "media/mexican/orange_juice.jpg" , "Beverages", 1, 2.50),
-  (1, "Freshly-Squeezed Lime Juice",  "media/mexican/lime_juice.jpg" , "Beverages", 0, 2.50),
+  (1, "Freshly-Squeezed Lime Juice",  "media/mexican/lime_juice.jpeg" , "Beverages", 0, 2.50),
 
   (2, "Ghee Rice", "media/indian/ghee_rice.jpg" , "Main", 0, 3.00),
   (2, "Naan", "media/indian/naan.jpg" , "Main", 1, 2.50),

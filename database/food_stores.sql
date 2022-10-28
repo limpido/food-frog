@@ -2,9 +2,9 @@ drop table if exists food_stores;
 create table food_stores
 (
   id int not null AUTO_INCREMENT,
-  name char(50) not null,
-  image char(50) not null,
-  cuisine_type char(50) default 0,
+  name varchar(50) not null,
+  image varchar(100) not null,
+  cuisine_type varchar(50) default 0,
   primary key (id)
 );
 
