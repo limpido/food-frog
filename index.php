@@ -57,27 +57,26 @@
         </header>
         <main>
             <div class="container">
-            <?php
-            include "dbconnect.php";
+              <?php
+              include "dbconnect.php";
 
-            $query = "SELECT * FROM food_stores;";
-            $result = $db->query($query);
+              $query = "SELECT * FROM food_stores;";
+              $result = $db->query($query);
 
-            for ($i=0; $i < $result->num_rows; $i++) {
-              $store = $result->fetch_object();
-              echo '<a class="link" href="food-store.php?id='.$store->id.'"><div class="food-store">
-              <div class="img-container"><img class="store-img" src="' . $store->image. '"></div>
-              <div class="text-container">
-              <div class="store-title">'.$store->name.'</div>
-              <div class="cuisine-type"><span>'.$store->cuisine_type.'</span></div>
-              </div>
-            </div></a>';
-            }
-            ?>
+              for ($i=0; $i < $result->num_rows; $i++) {
+                $store = $result->fetch_object();
+                echo '<a class="link" href="food-store.php?id='.$store->id.'&section=main"><div class="food-store">
+                <div class="img-container"><img class="store-img" src="' . $store->image. '"></div>
+                <div class="text-container">
+                <div class="store-title">'.$store->name.'</div>
+                <div class="cuisine-type"><span>'.$store->cuisine_type.'</span></div>
+                </div>
+              </div></a>';
+              }
+              ?>
             </div>
+            <?php include 'components/footer.php';?>  
         </main>
     </body>
-  <?php include 'components/footer.php';?>
 </body>
-</html>
 </html>

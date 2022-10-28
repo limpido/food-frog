@@ -2,12 +2,19 @@
 
 /* Get rid of all default margins/paddings. Set typeface */
 body {
-  box-sizing: border-box;
-  margin: 100px 130px;
-  padding: 0;
   background-color: #CCEDD2;
   font-family: "lato", sans-serif;
   color: #3C4146;
+  margin: 0;
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 100px 130px 150px;
 }
 
 .warning {
@@ -21,14 +28,15 @@ nav img {
 }
 
 nav {
-background-color: white;
-position: fixed;
-top: 0;
-left: 0;
-height: 80px;
-width: 100%;
-display: flex;
-align-items: center;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 10;
 }
 
 nav * {
@@ -42,6 +50,28 @@ margin: 20px;
 nav li a {
 color: black;
 text-decoration: none;
+}
+
+
+/* footer */
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #76BA99;
+  color: #EFFCEF;
+  text-align: center;
+  padding: 28px 0;
+}
+
+footer div:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+footer a {
+  color: #EFFCEF;
 }
 
 
@@ -77,7 +107,6 @@ text-decoration: none;
   padding: 0 20px;
   outline: none;
   background: none;
-  z-index: 1;
 }
 
 input:focus {
@@ -118,8 +147,33 @@ input:focus {
 }
 
 
+/* order history table */
 
+table {
+  border: none;
+  width: 100%;
+  border-spacing: 2px;
+}
 
+th {
+  padding: 16px;
+  color: #EFFCEF;
+}
 
+td {
+  padding: 10px;
+  text-align: center;
+}
 
+tr:nth-of-type(even) {
+  background-color: #A0D995;
+}
+
+tr:nth-of-type(odd) {
+  background-color: #6CC4A1;
+}
+
+tr:first-of-type {
+  background-color: #655C56;
+}
 

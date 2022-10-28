@@ -10,8 +10,7 @@
     </a>
     <ul>
         <li><a href="shopping-cart.php">Shopping Cart</a></li>
-        <li><a href="orderhistory.html">Order History</a></li>
-        <li><a href="profile.html">Profile</a></li>
+        <li><a href="order-history.php">Order History</a></li>
         <li><a href="logout.php">Log out</a></li>
     </ul>
     </nav>';
