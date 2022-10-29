@@ -5,6 +5,5 @@ create table if not exists users
   username char(20) not null,
   email char(100) not null,
   password char(32) not null,
-  phone int,
   primary key (id)
 );

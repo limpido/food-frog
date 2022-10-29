@@ -11,6 +11,7 @@
     <ul>
         <li><a href="shopping-cart.php">Shopping Cart</a></li>
         <li><a href="order-history.php">Order History</a></li>
+        <li><a href="profile.php">Profile</a></li>
         <li><a href="logout.php">Log out</a></li>
     </ul>
     </nav>';
