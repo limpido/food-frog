@@ -43,6 +43,7 @@
     } else {
       echo "<div class='warning'>Wrong email or password, please try again.</div>";
       include "components/login-form.php";
+      exit;
     }
     $db->close();
   }
