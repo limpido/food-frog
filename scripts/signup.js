@@ -100,6 +100,7 @@ function validateConfirmPwd() {
     confirmPwdNode.style.border = "1px solid #DADCE0";
   } else {
     validConfirmPwd = false;
+    alert("Passwords do not match.");
     confirmPwdNode.focus();
     confirmPwdNode.select();
     confirmPwdNode.style.border = "2px solid red";

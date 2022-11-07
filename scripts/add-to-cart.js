@@ -1,11 +1,13 @@
 function AddToCart(id) {
-  const addBtn = document.getElementById(`addBtn_${id}`);
+  const addBtns = document.getElementsByClassName(`addBtn_${id}`);
 
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.status === 200) {
-      addBtn.innerHTML = "Added";
-      addBtn.disabled = true;
+      for (let i=0; i<addBtns.length; i++) {
+        addBtns[i].innerHTML = "Added";
+        addBtns[i].disabled = true;
+      }
     } else if (this.status === 400) {
       alert("You are not allowed to add items from multiple stores to the shopping cart, please empty your shopping cart first.")
     } else if (this.status === 401) {

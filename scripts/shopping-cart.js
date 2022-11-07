@@ -44,6 +44,7 @@ function updateSubtotal(id, price, increase) {
 
 function updateTotal(price, increase) {
   const totalNode = document.getElementById("total");
+  const hiddenTotal = document.getElementById("hiddenTotal");
   let total = Number(totalNode.innerHTML.slice(1));
   if (increase) {
     total += price;
@@ -51,6 +52,7 @@ function updateTotal(price, increase) {
     total -= price;
   }
   totalNode.innerHTML = '$' + total.toFixed(2);
+  hiddenTotal.value = total;
 }
 
 function updatePlaceOrderButtonState() {

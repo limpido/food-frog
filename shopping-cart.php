@@ -25,7 +25,6 @@
       height: 100%;
       width: 300px;
       overflow: hidden;
-      margin-right: 20px;
     }
 
     .item-img {
@@ -109,8 +108,8 @@
 
                 echo '<form method="POST" action="place-order.php">';
                 // select collection point
-                echo '<div>';
-                echo '<label for="collection-point">Choose a collection point:</label><br>';
+                echo '<div class="inputContainer">';
+                echo '<label for="collection-point">Choose a collection point:</label>';
                 echo '<select name="collectionPoint" id="collectionPoint">';
                 $queryCollectionPoint = "SELECT * FROM collection_points;";
                 $res = $db->query($queryCollectionPoint);
@@ -122,8 +121,8 @@
                 echo '</div>';
 
                 // select collection time
-                echo '<div>';
-                echo '<label for="collection-time">Choose a collection time:</label><br>';
+                echo '<div class="inputContainer">';
+                echo '<label for="collection-time">Choose a collection time for tomorrow:</label>';
                 echo '<select name="collectionTime" id="collectionTime">';
                 $queryCollectionTime = "SELECT * FROM collection_time;";
                 $res = $db->query($queryCollectionTime);
@@ -133,7 +132,7 @@
                 }
                 echo '</select>';
                 echo '</div>';
-                echo '<input type="hidden" name="total" value="'.$total.'" />';
+                echo '<input type="hidden" name="total" value="'.$total.'" id="hiddenTotal" />';
 
                 // total price
                 echo '<div class="total">Total: <span id="total">$'.number_format((float)$total, 2, ".", "").'</span></div>';
@@ -158,8 +157,7 @@
           </div>
           <?php include 'components/footer.php';?>
           </main>
-    </body>
-</body>
+  </body>
 <script>
   <?php
   $jsonCart = json_encode($_SESSION['cart']);

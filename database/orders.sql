@@ -9,5 +9,5 @@ create table orders
   collection_point VARCHAR(100),
   collection_time VARCHAR(100),
   PRIMARY KEY (id),
-  FOREIGN KEY (store_id) REFERENCES food_stores(id)
+  FOREIGN KEY (food_store_id) REFERENCES food_stores(id)
 );

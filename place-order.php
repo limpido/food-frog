@@ -38,7 +38,6 @@
               $total = $_POST['total'];
 
               $insertOrder = "INSERT INTO orders (uid, food_store_id, total, collection_point, collection_time) VALUES (".$_SESSION['uid'].", ".$storeId.", ".$total.", '".$collectionPoint."', '".$collectionTime."')";
-              echo $insertOrder;
 
               if ($db->query($insertOrder) === TRUE) {
                 $order_id = $db->insert_id;
@@ -49,6 +48,7 @@
                 </head>
                 <body>
                 <p>Thank you for ordering with us. Below is your receipt.</p>
+                <p>Please be reminded to collect your food the next day from your chosen collection point at your chosen timing. Thank you.</p>
                 <table>
                 <tr>
                 <th>Item</th>
@@ -71,36 +71,36 @@
                   }
                   $content .= '<tr>
                               <td>'.$item->name.'</td>
-                              <td>'.$item->price.'</td>
+                              <td>$'.$item->price.'</td>
                               <td>'.$quantity.'</td>
-                              <td>'.$subtotal.'</td>
+                              <td>$'.number_format((float)$subtotal, 2, ".", "").'</td>
                               </tr>';
                 }
 
-                $content .= '<tr><td></td><td>Total:</td><td>'.$total.'</td></tr>
-                             <tr><td></td><td>Collection Point:</td><td>Not available</td></tr>
-                             <tr><td></td><td>Collection Time:</td><td>Not available</td></tr>
-                             </table>
+                $content .= '</table><br>
+                             <div>Total: $'.number_format((float)$total, 2, ".", "").'</div>
+                             <div>Collection Point: '.$collectionPoint.'</div>
+                             <div>Collection Time: '.$collectionTime.'</div>
                              </body>
                              </html>';
 
                 unset($_SESSION['cart']);
 
                 // send receipt to email
-                // $queryUser = "SELECT * FROM users WHERE id=".$_SESSION['uid'];
-                // $res = $db->query($queryUser);
-                // $user = $res->fetch_object();
-                // $to = $user->email;
-                // $subject = "Receipt - FoodFrog";
-                // $headers = "MIME-Version: 1.0" . "\r\n";
-                // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                // $headers .= 'From: <donotreply@foodfrog.com>' . "\r\n";
-                // mail($to,$subject,$content,$headers);
+                $to = 'f32ee@localhost';
+                $subject = "Receipt - FoodFrog";
+                $headers = 'From: f31ee@localhost' . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
+                $res = mail($to,$subject,$content,$headers);
 
-                echo '<div>Your order is successfully placed. The receipt has been sent to your email.</div>';
-
+                if ($res == true) {
+                  echo '<div>Your order is successfully placed. The receipt has been sent to your email address.</div>';
+                } else {
+                  echo '<div>Oops! Receipt cannot be sent to your email, please try again.</div>';
+                }
               } else {
-                echo '<div>Oops, something wrong happens. Please try again later.</div>';
+                echo '<div>Oops! Your order cannot be placed, please try again.</div>';
               }
 
             }

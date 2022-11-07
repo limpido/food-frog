@@ -74,9 +74,20 @@
       margin-bottom: 10px;
     }
 
-    .review-form {
+    #reviewForm {
       width: 100%;
       margin: 16px 0 36px 0;
+    }
+
+    #reviewForm .inputContainer {
+      display: flex;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    #reviewForm select {
+      width: 200px;
+      margin-left: 20px;
     }
 
     .review {
@@ -89,10 +100,6 @@
     .review-title {
       font-weight: bold;
       margin-bottom: 6px;
-    }
-
-    .review-content {
-
     }
   </style>
 </head>
@@ -129,6 +136,27 @@
 
             <?php
             if ($_GET["section"] == "main") {
+              // best sellers
+              $queryBestSeller = "SELECT * FROM food_items WHERE food_store_id=".$_GET["id"]." AND is_best_seller=1";
+              $resBestSeller = $db->query($queryBestSeller);
+              if ($resBestSeller->num_rows > 0) {
+                echo '<div class="cat-container">';
+                echo '<div class="cat-title">Best Sellers</div>';
+                echo '<div class="item-container">';
+              }
+              for ($i=0; $i < $resBestSeller->num_rows; $i++) {
+                $item = $resBestSeller -> fetch_object();
+                echo '  <div class="item">';
+                echo '    <div class="item-img-container"><img class="item-img" src="'.$item->image.'"></div>';
+                echo '    <div class="item-name">'.$item->name.'</div>';
+                echo '    <div class="item-price">$'.$item->price.'</div>';
+                echo '    <button class="add-btn addBtn_'.$item->id.'" onclick="AddToCart('.$item->id.')">Add</button>';
+                echo '  </div>';
+              }
+              echo '</div>';
+              echo '</div>';
+              
+              // food items by categories
               $queryCategory = "SELECT DISTINCT food_category FROM food_items WHERE food_store_id=".$_GET["id"];
               $resCategory = $db->query($queryCategory);
               for ($i=0; $i < $resCategory->num_rows; $i++) {
@@ -145,7 +173,7 @@
                   echo '    <div class="item-img-container"><img class="item-img" src="'.$item->image.'"></div>';
                   echo '    <div class="item-name">'.$item->name.'</div>';
                   echo '    <div class="item-price">$'.$item->price.'</div>';
-                  echo '    <button class="add-btn" id="addBtn_'.$item->id.'" onclick="AddToCart('.$item->id.')">Add</button>';
+                  echo '    <button class="add-btn addBtn_'.$item->id.'" onclick="AddToCart('.$item->id.')">Add</button>';
                   echo '  </div>';
                 }
                 
@@ -153,19 +181,21 @@
                 echo '</div>';
               }
             } else if ($_GET["section"] == "review") {
-              echo '<form method="POST" action="upload-review.php" class="review-form">
+              echo '<form method="POST" action="upload-review.php" id="reviewForm">
               <div>Leave a review:</div>
-              <label for="rating">Rating (1-5):</label>
-              <select name="rating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <div><textarea name="review" rows="6" cols="80"></textarea></div>
+              <div class="inputContainer">
+                <label for="rating">Rating (1-5):</label>
+                <select name="rating">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div><textarea name="review" rows="6" cols="80" id="reviewInput" onchange=updateSubmitBtn()></textarea></div>
               <input type="hidden" name="store_id" value="'.$_GET['id'].'">
-              <div><input type="submit" value="Submit"></div>
+              <div><input type="submit" value="Submit" id="submit"></div>
               </form>';
 
               $query = "SELECT * FROM reviews WHERE food_store_id=".$_GET["id"]." ORDER BY created_at DESC";
@@ -173,7 +203,7 @@
               for ($i=0; $i < $res->num_rows; $i++) {
                 $review = $res->fetch_object();
                 echo '<div class="review">
-                        <div class="review-title">Anonymous User&nbsp;&nbsp;&VerticalLine;&nbsp;&nbsp;rating: '.$review->rating.'&nbsp;&nbsp;&VerticalLine;&nbsp;&nbsp;'.$review->created_at.'</div>
+                        <div class="review-title">'.$review->username.'&nbsp;&nbsp;&VerticalLine;&nbsp;&nbsp;rating: '.$review->rating.'&nbsp;&nbsp;&VerticalLine;&nbsp;&nbsp;'.$review->created_at.'</div>
                         <div class="review-content">'.$review->content.'</div>
                       </div>';
               }
@@ -186,4 +216,5 @@
     </body>
 </body>
 <script type="text/javascript" src="scripts/add-to-cart.js"></script>
+<script type="text/javascript" src="scripts/review.js"></script>
 </html>

@@ -55,6 +55,9 @@
         <header>
           <?php include 'components/nav.php';?>
         </header>
+
+        <img src="media/coverpage.jpg" style="width:100%">
+
         <main>
             <div class="container">
               <?php
@@ -78,5 +81,4 @@
             <?php include 'components/footer.php';?>  
         </main>
     </body>
-</body>
 </html>

@@ -22,7 +22,7 @@
         }
 
         if (isset($_SESSION['uid'])) {
-          $query = "SELECT * FROM orders WHERE uid=".$_SESSION['uid'];
+          $query = "SELECT * FROM orders WHERE uid=".$_SESSION['uid']." ORDER BY created_at DESC";
           $res = $db->query($query);
 
           if ($res->num_rows > 0) {
@@ -59,17 +59,6 @@
           echo '<p>Only logged in members may see this page.</p>';
         }
         ?>
-
-        <!-- <table>
-          <tr>
-            <th>Order Date</th>
-            <th>Food Store</th>
-            <th>Total</th>
-            <th>Collection Point</th>
-            <th>Collection Time</th>
-          </tr>
-
-        </table> -->
         </div>
         <?php include 'components/footer.php';?>
       </main>

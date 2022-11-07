@@ -18,9 +18,9 @@
                 session_start(); 
               }
               
-              if (isset($_SESSION['uid'])) {
+              if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['review']) && isset($_POST['store_id']) && isset($_POST['rating'])) {
-                  $query = "INSERT INTO reviews (food_store_id, content, rating) VALUES (".$_POST['store_id'].", '".$_POST['review']."', ".$_POST['rating'].")";
+                  $query = "INSERT INTO reviews (username, food_store_id, content, rating) VALUES ('".$_SESSION['username']."', ".$_POST['store_id'].", '".$_POST['review']."', ".$_POST['rating'].")";
                   if ($db->query($query) === TRUE) {
                     echo '<div>Your review has been successfully uploaded.</div>';
                   } else {

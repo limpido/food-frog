@@ -32,9 +32,10 @@
                     echo '<div>Oops, something went wrong, please try again.</div>';
                   }
                 }
-                echo '<form action="profile.php" method="POST">
-                  <div>Username: '.$user->username.'</div>
-                  <div>Email: '.$user->email.'</div>
+                echo '<form action="profile.php" id="profileForm" method="POST">
+                  <h1 class="title">Profile</h1>
+                  <div class="inputContainer"><label>Username</label>'.$user->username.'</div>
+                  <div class="inputContainer"><label>Email</label>'.$user->email.'</div>
                   <div class="inputContainer">
                     <label for="pwd">New Password</label>
                     <input type="password" name="pwd" id="pwd" value="" placeholder="Password" onchange="validatePwd()">
